@@ -1,60 +1,72 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <sign-in-dialog
+      @signedIn=""
+    ></sign-in-dialog>
+
+    <tree-item
+      :nodes="tree.nodes"
+      :depth="0"
+      :label="tree.label"
+    ></tree-item>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import SignInDialog from './elements/dialogs/SignInDialog';
+  import TreeItem from './elements/TreeItem';
+
+  const tree = {
+    label: 'root',
+    nodes: [
+      {
+        label: 'item1',
+        nodes: [
+          {
+            label: 'item1.1'
+          },
+          {
+            label: 'item1.2',
+            nodes: [
+              {
+                label: 'item1.2.1'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        label: 'item2'
+      }
+    ]
+  };
+
+
+  export default {
+    name: 'app',
+    data() {
+      return {
+        tree: tree,
+        loggedIn: false,
+        user: null
+      }
+    },
+    created() {
+      window.addEventListener('storage', () => {
+        this.loggedIn = localStorage.getItem('login') && localStorage.getItem('password');
+      });
+      this.loggedIn = localStorage.getItem('login') && localStorage.getItem('password');
+    },
+    components: {
+      'SignInDialog': SignInDialog,
+      'TreeItem': TreeItem,
     }
   }
-}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  body {
+    padding: 10px;
+    background-color: #E5E5E5;
+  }
 </style>
