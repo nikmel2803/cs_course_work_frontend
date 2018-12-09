@@ -12,7 +12,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.5.11",
-    "vue-router": "^3.0.2"
+    "vue-router": "^3.0.2",
+    "vuex": "^3.0.1"
   },
   "browserslist": [
     "> 1%",
@@ -26,6 +27,8 @@
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
+    "eslint": "^5.10.0",
+    "eslint-config-codex": "github:codex-team/eslint-config",
     "file-loader": "^1.1.4",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
