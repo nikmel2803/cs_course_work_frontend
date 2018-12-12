@@ -26,13 +26,15 @@ async function saveOrg(login, password, orgData) {
   await axios.post(`${API_ENDPOINT}/save-org`, config);
 }
 
-async function saveData() {
-  console.log('LOOOOOADED!!');
+async function signUp(data) {
+  const config = {...data};
+
+  await axios.post(`${API_ENDPOINT}/sign-up`, config);
 }
 
 export default {
   signIn,
   getData,
-  saveData,
+  signUp,
   saveOrg
 };

@@ -6,6 +6,7 @@
       <input required v-model="password" type="password" placeholder="Password"/>
       <hr/>
       <button type="submit">Login</button>
+      <router-link to="/sign-up">Зарегистрировать организацию</router-link>
     </form>
   </div>
 </template>
@@ -14,7 +15,7 @@
   import {AUTH_REQUEST} from '../store/actions/auth'
 
   export default {
-    name: 'SignIn',
+    name: 'SignInView',
     data() {
       return {
         login: '',

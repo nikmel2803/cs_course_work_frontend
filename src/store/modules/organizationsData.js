@@ -21,9 +21,9 @@ const actions = {
   async [SAVE_ORG]({commit, dispatch, rootState}, orgData) {
     const user = rootState.auth.user;
 
-    apiCall.saveOrg(user.login, user.password, orgData).then(() => {
-      commit(SAVE_ORG, orgData);
-    });
+    await apiCall.saveOrg(user.login, user.password, orgData);
+    commit(SAVE_ORG, orgData);
+
   }
 };
 

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import MainView from './views/MainView';
 import SignInView from './views/SignInView';
+import SignUpView from './views/SignUpView';
 import store from './store';
 
 Vue.use(Router);
@@ -35,6 +36,12 @@ const routes = {
       path: '/sign-in',
       name: 'SingIn',
       component: SignInView,
+      beforeEnter: ifNotAuthenticated
+    },
+    {
+      path: '/sign-up',
+      name: 'SingUp',
+      component: SignUpView,
       beforeEnter: ifNotAuthenticated
     }
   ]
