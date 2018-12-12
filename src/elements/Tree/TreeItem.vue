@@ -63,7 +63,7 @@
       float: left;
       min-width: 10px;
       min-height: 10px;
-      background-image: url("../assets/next.svg");
+      background-image: url("../../assets/next.svg");
     }
 
     .fa-plus-square-o {
