@@ -17,8 +17,6 @@
     name: 'MainView',
     created() {
       const user = this.$store.state.auth.user;
-
-
       this.$store.dispatch(LOAD_DATA);
     },
     computed: {

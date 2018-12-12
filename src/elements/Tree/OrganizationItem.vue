@@ -1,30 +1,30 @@
 <template>
   <div class="tree-item organization-item">
     <div class="tree-item__label-wrapper tree-item__label-wrapper--has-children" :class="iconClasses">
-      <div @click="toggleChildren" v-if="!showChildren">{{ data.name }}</div>
+      <div @click="toggleChildren" v-if="!showChildren">{{ org.name }}</div>
       <div v-else-if="!isEdit" @click="toggleChildren">
-        <h1 class="organization-item__name">{{ data.name }}</h1>
-        <div class="organization-item__description">Описание: {{ data.description }}</div>
-        <div class="organization-item__founding_date">Дата создания: {{ data.founding_date }}</div>
-        <div class="organization-item__address">Адрес: {{ data.address }}</div>
+        <h1 class="organization-item__name">{{ org.name }}</h1>
+        <div class="organization-item__description">Описание: {{ org.description }}</div>
+        <div class="organization-item__founding_date">Дата создания: {{ org.founding_date }}</div>
+        <div class="organization-item__address">Адрес: {{ org.address }}</div>
       </div>
       <div v-else>
         <table>
           <tr>
             <td>Название</td>
-            <td><input type="text" v-model="name"></td>
+            <td><input type="text" v-model="org.name"></td>
           </tr>
           <tr>
             <td>Описание</td>
-            <td><input type="text" v-model="description"></td>
+            <td><input type="text" v-model="org.description"></td>
           </tr>
           <tr>
             <td>Дата основания</td>
-            <td><input type="text" v-model="founding_date"></td>
+            <td><input type="text" v-model="org.founding_date"></td>
           </tr>
           <tr>
             <td>Адрес</td>
-            <td><input type="text" v-model="address"></td>
+            <td><input type="text" v-model="org.address"></td>
           </tr>
           <tr>
             <td>
@@ -40,11 +40,11 @@
     <div class="tree-item__dots" @click.capture="edit"></div>
     <car-park-item
       v-if="showChildren"
-      :data="data.car_park"
+      :data="data"
     ></car-park-item>
     <staff-item
       v-if="showChildren"
-      :data="data.employees"
+      :data="data"
     ></staff-item>
   </div>
 </template>
@@ -53,16 +53,19 @@
   import ItemMixin from './ItemMixin';
   import CarParkItem from './CarParkItem';
   import StaffItem from './StaffItem';
-  import OrganizationEdit from '../EditDialogs/OrganizationEdit';
+  import {SAVE_ORG} from '../../store/actions/organizationsData';
 
   export default {
     name: 'OrganizationItem',
     data() {
       return {
-        name: this.data.name,
-        description: this.data.description,
-        founding_date: this.data.founding_date,
-        address: this.data.address,
+        org: {
+          id: this.data.id,
+          name: this.data.name,
+          description: this.data.description,
+          founding_date: this.data.founding_date,
+          address: this.data.address
+        },
         isEdit: false
       };
     },
@@ -74,13 +77,14 @@
         this.showChildren = true;
       },
       saveData() {
-
+        this.$store.dispatch(SAVE_ORG, this.org).then(() => {
+          this.isEdit = false;
+        });
       }
     },
     components: {
       'CarParkItem': CarParkItem,
-      'StaffItem': StaffItem,
-      'OrganizationEdit': OrganizationEdit
+      'StaffItem': StaffItem
     }
   };
 </script>
