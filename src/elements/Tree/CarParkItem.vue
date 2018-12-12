@@ -1,9 +1,7 @@
 <template>
   <div class="tree-item car-park-item">
-    <div class="tree-item__label-wrapper tree-item__label-wrapper--has-children"
-         :class="iconClasses"
-         @click="toggleChildren">
-      <span>Автопарк</span>
+    <div class="tree-item__label-wrapper tree-item__label-wrapper--has-children" :class="iconClasses">
+      <div @click="toggleChildren">Автопарк</div>
     </div>
     <car-item
       v-if="showChildren"
