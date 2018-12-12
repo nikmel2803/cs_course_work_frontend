@@ -9,26 +9,33 @@
       v-if="showChildren"
       :data="data.car_park"
     ></car-park-item>
+    <staff-item
+      v-if="showChildren"
+      :data="data.employees"
+    ></staff-item>
   </div>
 </template>
 
 <script>
-  import ItemMixin from './ItemMixin'
+  import ItemMixin from './ItemMixin';
   import CarParkItem from './CarParkItem';
+  import StaffItem from './StaffItem';
 
   export default {
     name: 'OrganizationItem',
     mixins: [ItemMixin],
     props: ['data'],
     components: {
-      'CarParkItem': CarParkItem
+      'CarParkItem': CarParkItem,
+      'StaffItem': StaffItem
     }
   };
 </script>
 
 <style lang="scss">
   @import "ItemStyle";
-  .car-park-item{
-    margin-left: 50px;
+
+  .car-park-item {
+    margin-left: 25px;
   }
 </style>

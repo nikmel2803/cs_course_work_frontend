@@ -1,53 +1,34 @@
 <template>
-  <div class="tree-item">
-    <div class="label-wrapper" @click="toggleChildren">
-      <div :style="indent" :class="labelClasses">
-        <div v-if="nodes" class="fa" :class="iconClasses"></div>
-        {{ label }}
-      </div>
+  <div class="tree-item car-park-item">
+    <div class="tree-item__label-wrapper tree-item__label-wrapper--has-children"
+         :class="iconClasses"
+         @click="toggleChildren">
+      <span>Сотрудники</span>
     </div>
-    <tree-item
+    <employee-item
       v-if="showChildren"
-      v-for="node in nodes"
-      :nodes="node.nodes"
-      :label="node.label"
-      :depth="depth + 1"
-    ></tree-item>
+      v-for="emp in data"
+      :data="emp"
+    ></employee-item>
   </div>
 </template>
 
 <script>
+  import ItemMixin from './ItemMixin';
+  import EmployeeItem from './EmployeeItem';
+
   export default {
-    name: 'TreeItem',
-    props: ['nodes', 'label', 'depth'],
-    data() {
-      return {
-        showChildren: false
-      };
-    },
-    computed: {
-      iconClasses() {
-        return {
-          'fa-plus-square-o': !this.showChildren,
-          'fa-minus-square-o': this.showChildren
-        };
-      },
-      labelClasses() {
-        return {'has-children': this.nodes};
-      },
-      indent() {
-        return {transform: `translate(${this.depth * 50}px)`};
-      }
-    },
-    methods: {
-      toggleChildren() {
-        this.showChildren = !this.showChildren;
-      }
+    name: 'StaffItem',
+    mixins: [ItemMixin],
+    props: ['data'],
+    components: {
+      'EmployeeItem': EmployeeItem
     }
   };
 </script>
 
 <style lang="scss">
-  @import "ItemStyle";
-
+.employee-item{
+  margin-left: 20px;
+}
 </style>

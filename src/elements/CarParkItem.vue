@@ -28,5 +28,7 @@
 </script>
 
 <style lang="scss">
-
+  .car-item {
+    margin-left: 25px;
+  }
 </style>
