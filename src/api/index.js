@@ -16,7 +16,11 @@ async function getData(login, password) {
   return response.data;
 }
 
+async function saveData() {
+  console.log('LOOOOOADED!!');
+}
 export default {
   signIn,
-  getData
+  getData,
+  saveData: saveData
 };

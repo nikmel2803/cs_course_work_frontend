@@ -1,33 +1,28 @@
 <template>
   <div>
-
     <organization-item
-      v-for="org in data"
+      v-for="org in organizations"
       :data="org"
     ></organization-item>
   </div>
-
 </template>
 
 <script>
-  import OrganizationItem from '../elements/OrganizationItem';
-  import apiCall from '../api';
+  import OrganizationItem from '../elements/Tree/OrganizationItem';
+  import {LOAD_DATA} from '../store/actions/organizationsData';
 
   export default {
     name: 'MainView',
-    data() {
-      return {
-        data: null
-      };
-    },
     created() {
-      console.log('MainView created!');
       const user = this.$store.state.auth.user;
 
-      apiCall.getData(user.login, user.password).then(response => {
-        console.log(response.organizations);
-        this.data = response.organizations;
-      });
+
+      this.$store.dispatch(LOAD_DATA);
+    },
+    computed: {
+      organizations () {
+        return this.$store.state.organizationsData.organizations;
+      }
     },
     components: {
       'OrganizationItem': OrganizationItem,
