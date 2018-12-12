@@ -1,50 +1,22 @@
 <template>
   <div>
 
-    <h1>{{ data.name }}</h1>
-    <tree-item
-      :nodes="tree.nodes"
-      :depth="0"
-      :label="tree.label"
-    ></tree-item>
+    <organization-item
+      v-for="org in data"
+      :data="org"
+    ></organization-item>
   </div>
 
 </template>
 
 <script>
-  import TreeItem from '../elements/TreeItem';
+  import OrganizationItem from '../elements/OrganizationItem';
   import apiCall from '../api';
-
-  const tree = {
-    label: 'root',
-    nodes: [
-      {
-        label: 'item1',
-        nodes: [
-          {
-            label: 'item1.1'
-          },
-          {
-            label: 'item1.2',
-            nodes: [
-              {
-                label: 'item1.2.1'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        label: 'item2'
-      }
-    ]
-  };
 
   export default {
     name: 'MainView',
     data() {
       return {
-        tree,
         data: null
       };
     },
@@ -53,15 +25,16 @@
       const user = this.$store.state.auth.user;
 
       apiCall.getData(user.login, user.password).then(response => {
-        this.data = response;
+        console.log(response.organizations);
+        this.data = response.organizations;
       });
     },
     components: {
-      'TreeItem': TreeItem,
+      'OrganizationItem': OrganizationItem,
     }
   };
 </script>
 
-<style scoped>
+<style>
 
 </style>

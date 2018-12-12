@@ -48,26 +48,6 @@
 </script>
 
 <style lang="scss">
-  .tree-item {
-    .label-wrapper {
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #ccc;
+  @import "ItemStyle";
 
-      .has-children {
-        cursor: pointer;
-      }
-    }
-
-    .fa-plus-square-o {
-      float: left;
-      min-width: 10px;
-      min-height: 10px;
-      background-image: url("../assets/next.svg");
-    }
-
-    .fa-plus-square-o {
-
-    }
-  }
 </style>
