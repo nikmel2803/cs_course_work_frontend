@@ -36,7 +36,7 @@
       };
     },
     mixins: [ItemMixin],
-    props: ['data'],
+    props: ['data', 'index'],
     methods: {
       edit() {
         this.isEdit = true;

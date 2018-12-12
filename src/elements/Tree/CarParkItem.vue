@@ -7,8 +7,9 @@
     </div>
     <car-item
       v-if="showChildren"
-      v-for="car in data"
+      v-for="(car , index) in data"
       :data="car"
+      :key="index"
     ></car-item>
   </div>
 </template>

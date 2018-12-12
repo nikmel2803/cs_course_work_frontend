@@ -1,8 +1,10 @@
 <template>
   <div>
     <organization-item
-      v-for="org in organizations"
+      v-for="(org, index) in organizations"
       :data="org"
+      :index="index"
+      :key="index"
     ></organization-item>
   </div>
 </template>

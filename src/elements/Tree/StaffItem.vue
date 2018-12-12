@@ -7,8 +7,9 @@
     </div>
     <employee-item
       v-if="showChildren"
-      v-for="emp in data"
+      v-for="(emp , index) in data"
       :data="emp"
+      :key="index"
     ></employee-item>
   </div>
 </template>
