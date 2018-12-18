@@ -1,10 +1,9 @@
 <template>
   <div>
     <organization-item
-      v-for="(org, index) in organizations"
-      :data="org"
-      :index="index"
-      :key="index"
+      v-for="org in organizations"
+      :orgId="org.id"
+      :key="org.id"
     ></organization-item>
   </div>
 </template>
@@ -12,15 +11,17 @@
 <script>
   import OrganizationItem from '../elements/Tree/OrganizationItem';
   import {LOAD_DATA} from '../store/actions/organizationsData';
+  import api from '../api';
 
   export default {
     name: 'MainView',
-    created() {
+    async created() {
       const user = this.$store.state.auth.user;
-      this.$store.dispatch(LOAD_DATA);
+      const response = await api.getData(user.login, user.password);
+      this.$store.commit(LOAD_DATA, response);
     },
     computed: {
-      organizations () {
+      organizations() {
         return this.$store.state.organizationsData.organizations;
       }
     },

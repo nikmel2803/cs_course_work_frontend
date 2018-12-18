@@ -1,5 +1,6 @@
 .tree-item {
   background-color: #fff;
+  position: relative;
 
 
   &__label-wrapper {
@@ -8,7 +9,6 @@
       padding: 15px;
     }
 
-    position: relative;
 
     background-size: 10px 10px;
     background-repeat: no-repeat;
@@ -28,6 +28,18 @@
     width: 15px;
     height: 15px;
     background-image: url("../../assets/dots.svg");
+    background-position: center center;
+    background-size: 15px;
+    background-repeat: no-repeat;
+  }
+
+  &__new {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 15px;
+    height: 15px;
+    background-image: url("../../assets/new.svg");
     background-position: center center;
     background-size: 15px;
     background-repeat: no-repeat;

@@ -59,32 +59,30 @@
     name: 'OrganizationItem',
     data() {
       return {
-        org: {
-          id: this.data.id,
-          name: this.data.name,
-          description: this.data.description,
-          founding_date: this.data.founding_date,
-          address: this.data.address
-        },
         isEdit: false
       };
     },
     mixins: [ItemMixin],
-    props: ['data', 'index'],
+    props: ['orgId'],
     methods: {
       edit() {
         this.isEdit = true;
         this.showChildren = true;
       },
       saveData() {
-        this.$store.dispatch(SAVE_ORG, this.org).then(() => {
-          this.isEdit = false;
-        });
+        this.$store.commit(SAVE_ORG, this.org);
+        this.isEdit = false;
       }
     },
     components: {
       'CarParkItem': CarParkItem,
       'StaffItem': StaffItem
+    },
+    computed: {
+      org() {
+        const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
+        return org;
+      }
     }
   };
 </script>

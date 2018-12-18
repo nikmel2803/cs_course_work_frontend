@@ -18,9 +18,11 @@
     mixins: [ItemMixin],
     props: ['data', 'index'],
     data() {
-      const car = this.data.car_park[this.index - 1];
-      console.log(car);
-      return {
+      console.log('ubdex' + this.index);
+
+      console.log(this.data);
+      const car = this.data.car_park[this.index];
+        return {
         name: car.name,
         model: car.model,
         description: car.description,
