@@ -12,19 +12,19 @@
         <table>
           <tr>
             <td>Название</td>
-            <td><input type="text" v-model="org.name"></td>
+            <td><input type="text" v-model="name"></td>
           </tr>
           <tr>
             <td>Описание</td>
-            <td><input type="text" v-model="org.description"></td>
+            <td><input type="text" v-model="description"></td>
           </tr>
           <tr>
             <td>Дата основания</td>
-            <td><input type="text" v-model="org.founding_date"></td>
+            <td><input type="text" v-model="founding_date"></td>
           </tr>
           <tr>
             <td>Адрес</td>
-            <td><input type="text" v-model="org.address"></td>
+            <td><input type="text" v-model="address"></td>
           </tr>
           <tr>
             <td>
@@ -40,12 +40,12 @@
     <div class="tree-item__dots" @click.capture="edit"></div>
     <car-park-item
       v-if="showChildren"
-      :data="data"
+      :orgId="orgId"
     ></car-park-item>
-    <staff-item
-      v-if="showChildren"
-      :data="data"
-    ></staff-item>
+    <!--<staff-item-->
+    <!--v-if="showChildren"-->
+    <!--:data="data"-->
+    <!--&gt;</staff-item>-->
   </div>
 </template>
 
@@ -57,32 +57,32 @@
 
   export default {
     name: 'OrganizationItem',
-    data() {
-      return {
-        isEdit: false
-      };
-    },
     mixins: [ItemMixin],
-    props: ['orgId'],
     methods: {
-      edit() {
-        this.isEdit = true;
-        this.showChildren = true;
-      },
       saveData() {
-        this.$store.commit(SAVE_ORG, this.org);
+        this.$store.commit(SAVE_ORG, {
+          id: this.orgId,
+          name: this.name,
+          founding_date: this.founding_date,
+          description: this.description,
+          address: this.address
+        });
         this.isEdit = false;
       }
+    },
+    data() {
+      const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
+
+      return {
+        name: org.name,
+        founding_date: org.founding_date,
+        description: org.description,
+        address: org.address
+      };
     },
     components: {
       'CarParkItem': CarParkItem,
       'StaffItem': StaffItem
-    },
-    computed: {
-      org() {
-        const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
-        return org;
-      }
     }
   };
 </script>

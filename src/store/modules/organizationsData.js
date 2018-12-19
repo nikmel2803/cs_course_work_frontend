@@ -1,4 +1,5 @@
 import {SAVE_DATA, LOAD_DATA, SAVE_ORG, SAVE_CAR} from '../actions/organizationsData';
+import Vue from 'vue';
 
 const state = {
   organizations: null
@@ -16,20 +17,16 @@ const mutations = {
   },
   [SAVE_ORG](state, {id, name, description, founding_date, address}) {
     const org = getOrg(id);
-
-    org.name = name;
-    org.description = description;
-    org.founding_date = founding_date;
-    org.address = address;
+    console.log(id);
+    console.log(org);
+    Vue.set(org, 'name', name);
+    Vue.set(org, 'description', description);
+    Vue.set(org, 'founding_date', founding_date);
+    Vue.set(org, 'address', address);
   },
   [SAVE_CAR](state, {id, index, name, model, purchase_date, description}) {
     const org = getOrg(id);
-
-    org.car_park[index] = {};
-    org.car_park[index].name = name;
-    org.car_park[index].model = model;
-    org.car_park[index].purchase_date = purchase_date;
-    org.car_park[index].description = description;
+    Vue.set(org.car_park, index, {name, model, purchase_date, description});
   }
 };
 

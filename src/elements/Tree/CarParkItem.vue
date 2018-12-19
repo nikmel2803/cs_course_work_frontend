@@ -7,8 +7,8 @@
     <car-item
       v-if="showChildren"
       v-for="(car, index) in carPark"
-      :data="data"
-      :index="index"
+      :orgId="orgId"
+      :carIndex="index"
       :key="index"
     ></car-item>
   </div>
@@ -22,27 +22,20 @@
   export default {
     name: 'CarParkItem',
     mixins: [ItemMixin],
-    props: ['data'],
     components: {
       'CarItem': CarItem
     },
     methods: {
       newCar() {
-        console.log(this.data.car_park.length);
+        console.log(this.carPark.length);
         this.$store.commit(SAVE_CAR, {
-          id: this.data.id,
-          index: this.data.car_park.length,
+          id: this.orgId,
+          index: this.carPark.length,
           name: 'Наименование',
           model: 'Модель',
           purchase_date: 'Дата приобретения',
           description: 'Описание',
         });
-      }
-    },
-    computed: {
-      carPark() {
-        console.log('wdwqd')
-        return this.data.car_park;
       }
     }
   };
