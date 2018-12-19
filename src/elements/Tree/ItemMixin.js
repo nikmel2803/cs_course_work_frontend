@@ -1,5 +1,7 @@
+import api from '../../api';
+
 export default {
-  props: [ 'orgId' ],
+  props: ['orgId'],
   data() {
     return {
       showChildren: false,
@@ -24,6 +26,10 @@ export default {
     edit() {
       this.isEdit = true;
       this.showChildren = true;
+    },
+    postToServer() {
+      const user = this.$store.state.auth.user;
+      api.saveOrg(user.login, user.password, this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId));
     },
     toggleChildren() {
       this.showChildren = !this.showChildren;

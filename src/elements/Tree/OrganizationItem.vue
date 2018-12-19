@@ -68,7 +68,9 @@
           address: this.address
         });
         this.isEdit = false;
+        this.postToServer();
       }
+
     },
     data() {
       const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);

@@ -82,6 +82,7 @@
           purchase_date: this.purchase_date
         });
         this.isEdit = false;
+        this.postToServer();
       }
     }
   };
