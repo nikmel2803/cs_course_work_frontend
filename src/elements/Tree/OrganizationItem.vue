@@ -27,7 +27,6 @@
           </tr>
           <tr>
             <td>
-
             </td>
             <td>
               <button @click="saveData">Сохранить</button>
@@ -77,7 +76,7 @@
     }
   }
 
-  .car-park-item {
+  .car-park-item, .staff-item {
     margin-left: 25px;
   }
 </style>

@@ -1,8 +1,48 @@
 <template>
   <div class="tree-item employee-item">
     <div class="tree-item__label-wrapper">
-      <span>{{ data.last_name }} {{data.first_name}} {{data.patronymic}}</span>
+      <div @click="toggleChildren" v-if="!showChildren">{{ data.first_name }}</div>
+      <div v-else-if="!isEdit" @click="toggleChildren">
+        <!--<h1 class="organization-item__name">{{ data.name }}</h1>-->
+        <!--<div class="organization-item__status">Статус: {{ data.status }}</div>-->
+        <!--<div class="organization-item__description">Описание: {{ data.description }}</div>-->
+        <!--<div class="organization-item__founding_date">Модель {{ data.model }}</div>-->
+        <!--<div class="organization-item__address">Дата приобретения {{ data.purchase_date }}</div>-->
+      </div>
+      <div v-else>
+        <!--<table>-->
+          <!--<tr>-->
+            <!--<td>Название</td>-->
+            <!--<td><input type="text" v-model="data.name"></td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<td>Описание</td>-->
+            <!--<td><input type="text" v-model="data.description"></td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<td>Модель</td>-->
+            <!--<td><input type="text" v-model="data.model"></td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<td>Статус</td>-->
+            <!--<td><input type="text" v-model="data.status"></td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<td>Дата приобретения</td>-->
+            <!--<td><input type="text" v-model="data.purchase_date"></td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<td>-->
+            <!--</td>-->
+            <!--<td>-->
+              <!--<button @click="saveData">Сохранить</button>-->
+            <!--</td>-->
+          <!--</tr>-->
+        <!--</table>-->
+      </div>
     </div>
+    <div class="tree-item__dots" @click.capture="edit"></div>
+    <div class="tree-item__remove" @click.capture="$emit('removeEmployee')"></div>
   </div>
 </template>
 
@@ -12,9 +52,19 @@
   export default {
     name: 'EmployeeItem',
     mixins: [ItemMixin],
+    methods: {
+      saveData() {
+        this.isEdit = false;
+        this.$eventHub.$emit('save');      }
+    }
   };
 </script>
 
 <style lang="scss">
-
+  .employee-item {
+    &__name {
+      font-size: 20px;
+      margin: 0;
+    }
+  }
 </style>

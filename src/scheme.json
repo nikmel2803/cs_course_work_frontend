@@ -41,6 +41,7 @@
       "access": 1
     },
     "access": {
+      "default":2,
       "type": "string",
       "name": "Уровень доступа",
       "access": 1
