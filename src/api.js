@@ -22,7 +22,7 @@ async function saveOrg(login, password, orgData) {
   const config = {
     login, password, orgData
   };
-
+  console.log(orgData);
   await axios.post(`${API_ENDPOINT}/save-org`, config);
 }
 

@@ -17,7 +17,7 @@
 <script>
   import ItemMixin from './ItemMixin';
   import CarItem from './CarItem';
-  import {SAVE_CAR} from '../../store/actions/organizationsData';
+  import { ADD_CAR } from '../../store/actions/organizationsData';
 
   export default {
     name: 'CarParkItem',
@@ -27,15 +27,7 @@
     },
     methods: {
       newCar() {
-        console.log(this.carPark.length);
-        this.$store.commit(SAVE_CAR, {
-          id: this.orgId,
-          index: this.carPark.length,
-          name: 'Наименование',
-          model: 'Модель',
-          purchase_date: 'Дата приобретения',
-          description: 'Описание',
-        });
+        this.$store.commit(ADD_CAR, {orgId: this.orgId});
       }
     }
   };

@@ -1,7 +1,7 @@
 import api from '../../api';
 
 export default {
-  props: ['orgId'],
+  props: [ 'orgId' ],
   data() {
     return {
       showChildren: false,
@@ -19,6 +19,7 @@ export default {
       return this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
     },
     carPark() {
+      // console.log('carPark change');
       return this.org.car_park;
     }
   },
@@ -29,6 +30,7 @@ export default {
     },
     postToServer() {
       const user = this.$store.state.auth.user;
+
       api.saveOrg(user.login, user.password, this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId));
     },
     toggleChildren() {

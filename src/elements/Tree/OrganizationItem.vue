@@ -61,7 +61,7 @@
     methods: {
       saveData() {
         this.$store.commit(SAVE_ORG, {
-          id: this.orgId,
+          orgId: this.orgId,
           name: this.name,
           founding_date: this.founding_date,
           description: this.description,

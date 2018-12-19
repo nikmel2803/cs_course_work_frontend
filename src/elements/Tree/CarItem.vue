@@ -4,6 +4,7 @@
       <div @click="toggleChildren" v-if="!showChildren">{{ name }}</div>
       <div v-else-if="!isEdit" @click="toggleChildren">
         <h1 class="organization-item__name">{{ name }}</h1>
+        <div class="organization-item__status">Статус: {{ status }}</div>
         <div class="organization-item__description">Описание: {{ description }}</div>
         <div class="organization-item__founding_date">Модель {{ model }}</div>
         <div class="organization-item__address">Дата приобретения {{ purchase_date }}</div>
@@ -21,6 +22,10 @@
           <tr>
             <td>Модель</td>
             <td><input type="text" v-model="model"></td>
+          </tr>
+          <tr>
+            <td>Статус</td>
+            <td><input type="text" v-model="status"></td>
           </tr>
           <tr>
             <td>Дата приобретения</td>
@@ -54,16 +59,18 @@
       const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
 
       const car = org.car_park[this.carIndex];
+      console.log(car)
       return {
         name: car.name,
         model: car.model,
+        status: car.status,
         description: car.description,
         purchase_date: car.purchase_date
       };
     },
     methods: {
       remove(){
-        this.$store.commit(REMOVE_CAR, {carIndex: this.carIndex, id:this.orgId})
+        this.$store.commit(REMOVE_CAR, {carIndex: this.carIndex, orgId:this.orgId})
       },
       resetData() {
         const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
@@ -72,6 +79,7 @@
 
         this.name = car.name;
         this.model = car.model;
+        this.status = car.status;
         this.description = car.description;
         this.purchase_date = car.purchase_date;
 
@@ -79,9 +87,11 @@
       },
       saveData() {
         this.$store.commit(SAVE_CAR, {
-          id: this.orgId,
+          carIndex: this.carIndex,
+          orgId: this.orgId,
           name: this.name,
           model: this.model,
+          status: this.status,
           description: this.description,
           purchase_date: this.purchase_date
         });
