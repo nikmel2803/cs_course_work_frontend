@@ -31,8 +31,8 @@
         </table>
       </div>
     </div>
-    <div class="tree-item__dots" @click.capture="edit"></div>
-    <div class="tree-item__remove" @click.capture="$emit('removeEmployee')"></div>
+    <div class="tree-item__dots" v-if="user.access<2" @click.capture="edit"></div>
+    <div class="tree-item__remove" v-if="user.access<2" @click.capture="$emit('removeEmployee')"></div>
   </div>
 </template>
 

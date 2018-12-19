@@ -1,7 +1,5 @@
-import api from '../../api';
-
 export default {
-  props: ['data'],
+  props: [ 'data' ],
   data() {
     return {
       showChildren: false,
@@ -14,6 +12,9 @@ export default {
         'tree-item--opened': !this.showChildren,
         'tree-item--closed': this.showChildren
       };
+    },
+    user() {
+      return this.$store.state.auth.user;
     }
   },
   methods: {

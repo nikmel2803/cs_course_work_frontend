@@ -1,5 +1,6 @@
 import {AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT} from '../actions/auth';
 import apiCall from '../../api';
+import router from '../../router';
 
 const state = {
   user: JSON.parse(localStorage.getItem('user')) || '',
@@ -28,7 +29,6 @@ const actions = {
   },
   async [AUTH_LOGOUT]({commit, dispatch}) {
     commit(AUTH_LOGOUT);
-    localStorage.removeItem('user');
   }
 };
 
@@ -47,6 +47,8 @@ const mutations = {
   },
   [AUTH_LOGOUT](state) {
     state.user = '';
+    localStorage.clear();
+    router.push('/sign-in');
   }
 };
 

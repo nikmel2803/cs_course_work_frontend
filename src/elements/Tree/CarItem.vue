@@ -13,23 +13,27 @@
         <table>
           <tr>
             <td>Название</td>
-            <td><input type="text" v-model="data.name"></td>
+            <td><input type="text" :disabled="user.access === 2" v-model="data.name"></td>
           </tr>
           <tr>
             <td>Описание</td>
-            <td><input type="text" v-model="data.description"></td>
+            <td><input type="text" :disabled="user.access === 2" v-model="data.description"></td>
           </tr>
           <tr>
             <td>Модель</td>
-            <td><input type="text" v-model="data.model"></td>
+            <td><input type="text" :disabled="user.access === 2" v-model="data.model"></td>
           </tr>
           <tr>
             <td>Статус</td>
-            <td><input type="text" v-model="data.status"></td>
+            <td><input type="text" :disabled="!canEdit" v-model="data.status"></td>
+          </tr>
+          <tr>
+            <td>Водители</td>
+            <td><input type="text" :disabled="user.access === 2" v-model="data.drivers"></td>
           </tr>
           <tr>
             <td>Дата приобретения</td>
-            <td><input type="text" v-model="data.purchase_date"></td>
+            <td><input type="text" :disabled="user.access === 2" v-model="data.purchase_date"></td>
           </tr>
           <tr>
             <td>
@@ -42,7 +46,7 @@
       </div>
     </div>
     <div class="tree-item__dots" @click.capture="edit"></div>
-    <div class="tree-item__remove" @click.capture="$emit('removeCar')"></div>
+    <div class="tree-item__remove" v-if="user.access<2" @click.capture="$emit('removeCar')"></div>
   </div>
 </template>
 
@@ -55,7 +59,15 @@
     methods: {
       saveData() {
         this.isEdit = false;
-        this.$eventHub.$emit('save');      }
+        this.$eventHub.$emit('save');
+      }
+    },
+    computed: {
+      canEdit() {
+        if (this.user.access < 2) return true;
+        if (this.data.drivers.includes(this.user.login)) return true;
+        return false;
+      }
     }
   };
 </script>

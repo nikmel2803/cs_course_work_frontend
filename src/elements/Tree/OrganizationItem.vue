@@ -35,7 +35,7 @@
         </table>
       </div>
     </div>
-    <div class="tree-item__dots" @click.capture="edit"></div>
+    <div class="tree-item__dots" v-show="user.access>2" @click.capture="edit"></div>
     <car-park-item
       :data="data.car_park"
     ></car-park-item>

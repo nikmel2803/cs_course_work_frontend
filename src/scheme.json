@@ -38,21 +38,18 @@
     "password": {
       "type": "string",
       "name": "Пароль",
-      "access": 1,
-      "show": false
+      "access": 1
     },
     "access": {
       "default": 2,
       "type": "number",
       "name": "Уровень доступа",
       "access": 1,
-      "available_values":
-        {
-          "0": "Глава организации",
-          "1": "Менеджер",
-          "2": "Водитель"
-        }
-
+      "available_values": {
+        "0": "Глава организации",
+        "1": "Менеджер",
+        "2": "Водитель"
+      }
     },
     "first_name": {
       "type": "string",
@@ -73,12 +70,10 @@
       "type": "number",
       "name": "Пол",
       "access": 1,
-      "available_values":
-        {
-          "0": "Ж",
-          "1": "М"
-        }
-
+      "available_values": {
+        "0": "Ж",
+        "1": "М"
+      }
     },
     "birthday": {
       "type": "string",
@@ -94,7 +89,7 @@
   "car_park": {
     "name": {
       "type": "string",
-      "access": 2,
+      "access": 1,
       "name": "Название"
     },
     "status": {
@@ -104,18 +99,23 @@
     },
     "model": {
       "type": "string",
-      "access": 2,
+      "access": 1,
       "name": "Модель"
     },
     "purchase_date": {
       "type": "string",
-      "access": 2,
+      "access": 1,
       "name": "Дата приобретения"
     },
     "description": {
       "type": "string",
-      "access": 2,
+      "access": 1,
       "name": "Описание"
+    },
+    "drivers": {
+      "type": "string",
+      "access": 1,
+      "name": "Водители"
     }
   }
 }
