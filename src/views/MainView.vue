@@ -1,28 +1,25 @@
 <template>
   <div>
     <organization-item
-      v-for="org in organizations"
-      :orgId="org.id"
-      :key="org.id"
+      :data="org"
     ></organization-item>
   </div>
 </template>
 
 <script>
   import OrganizationItem from '../elements/Tree/OrganizationItem';
-  import {LOAD_DATA} from '../store/actions/organizationsData';
   import api from '../api';
 
   export default {
     name: 'MainView',
     async created() {
-      const user = this.$store.state.auth.user;
-      const response = await api.getData(user.login, user.password);
-      this.$store.commit(LOAD_DATA, response);
+      const response = await api.getData();
+      this.$eventHub.$on('save', () => api.saveData(this.org));
+      this.org = response;
     },
-    computed: {
-      organizations() {
-        return this.$store.state.organizationsData.organizations;
+    data() {
+      return {
+        org: {}
       }
     },
     components: {

@@ -1,39 +1,38 @@
 <template>
   <div class="tree-item car-item">
     <div class="tree-item__label-wrapper">
-      <div @click="toggleChildren" v-if="!showChildren">{{ name }}</div>
+      <div @click="toggleChildren" v-if="!showChildren">{{ data.name }}</div>
       <div v-else-if="!isEdit" @click="toggleChildren">
-        <h1 class="organization-item__name">{{ name }}</h1>
-        <div class="organization-item__status">Статус: {{ status }}</div>
-        <div class="organization-item__description">Описание: {{ description }}</div>
-        <div class="organization-item__founding_date">Модель {{ model }}</div>
-        <div class="organization-item__address">Дата приобретения {{ purchase_date }}</div>
+        <h1 class="organization-item__name">{{ data.name }}</h1>
+        <div class="organization-item__status">Статус: {{ data.status }}</div>
+        <div class="organization-item__description">Описание: {{ data.description }}</div>
+        <div class="organization-item__founding_date">Модель {{ data.model }}</div>
+        <div class="organization-item__address">Дата приобретения {{ data.purchase_date }}</div>
       </div>
       <div v-else>
         <table>
           <tr>
             <td>Название</td>
-            <td><input type="text" v-model="name"></td>
+            <td><input type="text" v-model="data.name"></td>
           </tr>
           <tr>
             <td>Описание</td>
-            <td><input type="text" v-model="description"></td>
+            <td><input type="text" v-model="data.description"></td>
           </tr>
           <tr>
             <td>Модель</td>
-            <td><input type="text" v-model="model"></td>
+            <td><input type="text" v-model="data.model"></td>
           </tr>
           <tr>
             <td>Статус</td>
-            <td><input type="text" v-model="status"></td>
+            <td><input type="text" v-model="data.status"></td>
           </tr>
           <tr>
             <td>Дата приобретения</td>
-            <td><input type="text" v-model="purchase_date"></td>
+            <td><input type="text" v-model="data.purchase_date"></td>
           </tr>
           <tr>
             <td>
-              <button @click="resetData">Отмена</button>
             </td>
             <td>
               <button @click="saveData">Сохранить</button>
@@ -43,61 +42,20 @@
       </div>
     </div>
     <div class="tree-item__dots" @click.capture="edit"></div>
-    <div class="tree-item__remove" @click.capture="remove"></div>
+    <div class="tree-item__remove" @click.capture="$emit('removeCar')"></div>
   </div>
 </template>
 
 <script>
   import ItemMixin from './ItemMixin';
-  import {SAVE_CAR, REMOVE_CAR} from '../../store/actions/organizationsData';
 
   export default {
     name: 'CarItem',
     mixins: [ItemMixin],
-    props: ['carIndex'],
-    data() {
-      const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
-
-      const car = org.car_park[this.carIndex];
-      console.log(car)
-      return {
-        name: car.name,
-        model: car.model,
-        status: car.status,
-        description: car.description,
-        purchase_date: car.purchase_date
-      };
-    },
     methods: {
-      remove(){
-        this.$store.commit(REMOVE_CAR, {carIndex: this.carIndex, orgId:this.orgId})
-      },
-      resetData() {
-        const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
-
-        const car = org.car_park[this.carIndex];
-
-        this.name = car.name;
-        this.model = car.model;
-        this.status = car.status;
-        this.description = car.description;
-        this.purchase_date = car.purchase_date;
-
-        this.isEdit = false;
-      },
       saveData() {
-        this.$store.commit(SAVE_CAR, {
-          carIndex: this.carIndex,
-          orgId: this.orgId,
-          name: this.name,
-          model: this.model,
-          status: this.status,
-          description: this.description,
-          purchase_date: this.purchase_date
-        });
         this.isEdit = false;
-        this.postToServer();
-      }
+        this.$eventHub.$emit('save');      }
     }
   };
 </script>

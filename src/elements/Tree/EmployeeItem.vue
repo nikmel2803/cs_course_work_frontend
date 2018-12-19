@@ -12,7 +12,6 @@
   export default {
     name: 'EmployeeItem',
     mixins: [ItemMixin],
-    props: ['data']
   };
 </script>
 

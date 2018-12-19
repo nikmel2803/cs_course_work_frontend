@@ -6,9 +6,9 @@
     <div class="tree-item__new" @click.capture="newCar"></div>
     <car-item
       v-if="showChildren"
-      v-for="(car, index) in carPark"
-      :orgId="orgId"
-      :carIndex="index"
+      @removeCar="removeCar(index)"
+      v-for="(car, index) in data"
+      :data="car"
       :key="index"
     ></car-item>
   </div>
@@ -17,7 +17,6 @@
 <script>
   import ItemMixin from './ItemMixin';
   import CarItem from './CarItem';
-  import { ADD_CAR } from '../../store/actions/organizationsData';
 
   export default {
     name: 'CarParkItem',
@@ -27,7 +26,16 @@
     },
     methods: {
       newCar() {
-        this.$store.commit(ADD_CAR, {orgId: this.orgId});
+        const carData = {};
+        for (let key in this.$scheme.car_park) {
+          carData[key] = this.$scheme.car_park[key].name;
+        }
+        this.data.push(carData);
+        this.$eventHub.$emit('save');
+      },
+      removeCar(index) {
+        this.data.splice(index, 1);
+        this.$eventHub.$emit('save');
       }
     }
   };

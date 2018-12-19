@@ -1,7 +1,7 @@
 <template>
   <div>
     <form class="sing-in" @submit.prevent="signIn">
-      <h1>Sign in</h1>
+      <h1>Войти</h1>
       <input required v-model="login" type="text" placeholder="Login"/>
       <input required v-model="password" type="password" placeholder="Password"/>
       <hr/>

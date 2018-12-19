@@ -30,7 +30,6 @@ const routes = {
       name: 'Main',
       component: MainView,
       beforeEnter: ifAuthenticated
-
     },
     {
       path: '/sign-in',

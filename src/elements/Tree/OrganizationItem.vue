@@ -1,34 +1,33 @@
 <template>
   <div class="tree-item organization-item">
     <div class="tree-item__label-wrapper tree-item__label-wrapper--has-children" :class="iconClasses">
-      <div @click="toggleChildren" v-if="!showChildren">{{ org.name }}</div>
-      <div v-else-if="!isEdit" @click="toggleChildren">
-        <h1 class="organization-item__name">{{ org.name }}</h1>
-        <div class="organization-item__description">Описание: {{ org.description }}</div>
-        <div class="organization-item__founding_date">Дата создания: {{ org.founding_date }}</div>
-        <div class="organization-item__address">Адрес: {{ org.address }}</div>
+      <div v-if="!isEdit" @click="toggleChildren">
+        <h1 class="organization-item__name">{{ data.name }}</h1>
+        <div class="organization-item__description">Описание: {{ data.description }}</div>
+        <div class="organization-item__founding_date">Дата создания: {{ data.founding_date }}</div>
+        <div class="organization-item__address">Адрес: {{ data.address }}</div>
       </div>
       <div v-else>
         <table>
           <tr>
             <td>Название</td>
-            <td><input type="text" v-model="name"></td>
+            <td><input type="text" v-model="data.name"></td>
           </tr>
           <tr>
             <td>Описание</td>
-            <td><input type="text" v-model="description"></td>
+            <td><input type="text" v-model="data.description"></td>
           </tr>
           <tr>
             <td>Дата основания</td>
-            <td><input type="text" v-model="founding_date"></td>
+            <td><input type="text" v-model="data.founding_date"></td>
           </tr>
           <tr>
             <td>Адрес</td>
-            <td><input type="text" v-model="address"></td>
+            <td><input type="text" v-model="data.address"></td>
           </tr>
           <tr>
             <td>
-              <button @click="isEdit=false">Отмена</button>
+
             </td>
             <td>
               <button @click="saveData">Сохранить</button>
@@ -39,13 +38,11 @@
     </div>
     <div class="tree-item__dots" @click.capture="edit"></div>
     <car-park-item
-      v-if="showChildren"
-      :orgId="orgId"
+      :data="data.car_park"
     ></car-park-item>
-    <!--<staff-item-->
-    <!--v-if="showChildren"-->
-    <!--:data="data"-->
-    <!--&gt;</staff-item>-->
+    <staff-item
+      :data="data.employees"
+    ></staff-item>
   </div>
 </template>
 
@@ -53,34 +50,15 @@
   import ItemMixin from './ItemMixin';
   import CarParkItem from './CarParkItem';
   import StaffItem from './StaffItem';
-  import {SAVE_ORG} from '../../store/actions/organizationsData';
 
   export default {
     name: 'OrganizationItem',
     mixins: [ItemMixin],
     methods: {
       saveData() {
-        this.$store.commit(SAVE_ORG, {
-          orgId: this.orgId,
-          name: this.name,
-          founding_date: this.founding_date,
-          description: this.description,
-          address: this.address
-        });
         this.isEdit = false;
-        this.postToServer();
+        this.$eventHub.$emit('save');
       }
-
-    },
-    data() {
-      const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
-
-      return {
-        name: org.name,
-        founding_date: org.founding_date,
-        description: org.description,
-        address: org.address
-      };
     },
     components: {
       'CarParkItem': CarParkItem,

@@ -1,0 +1,106 @@
+{
+  "id": {
+    "name": "ID",
+    "type": "string",
+    "access": 0
+  },
+  "name": {
+    "name": "Название",
+    "type": "string",
+    "access": 0
+  },
+  "description": {
+    "name": "Описание",
+    "type": "string",
+    "access": 0
+  },
+  "founding_date": {
+    "name": "Дата основания",
+    "type": "string",
+    "access": 0
+  },
+  "address": {
+    "name": "Адрес",
+    "type": "string",
+    "access": 0
+  },
+  "head": {
+    "name": "Глава",
+    "type": "string",
+    "access": 0
+  },
+  "employees": {
+    "login": {
+      "type": "string",
+      "name": "Логин",
+      "access": 1
+    },
+    "password": {
+      "type": "string",
+      "name": "Пароль",
+      "access": 1
+    },
+    "access": {
+      "type": "string",
+      "name": "Уровень доступа",
+      "access": 1
+    },
+    "first_name": {
+      "type": "string",
+      "name": "Имя",
+      "access": 1
+    },
+    "last_name": {
+      "type": "string",
+      "name": "Фамилия",
+      "access": 1
+    },
+    "patronymic": {
+      "type": "string",
+      "name": "Отчество",
+      "access": 1
+    },
+    "sex": {
+      "type": "number",
+      "name": "Пол",
+      "access": 1
+    },
+    "birthday": {
+      "type": "string",
+      "name": "Дата рождения",
+      "access": 1
+    },
+    "position": {
+      "type": "string",
+      "name": "Должность",
+      "access": 1
+    }
+  },
+  "car_park": {
+    "name": {
+      "type": "string",
+      "access": 2,
+      "name": "Название"
+    },
+    "status": {
+      "type": "string",
+      "access": 2,
+      "name": "Статус"
+    },
+    "model": {
+      "type": "string",
+      "access": 2,
+      "name": "Модель"
+    },
+    "purchase_date": {
+      "type": "string",
+      "access": 2,
+      "name": "Дата приобретения"
+    },
+    "description": {
+      "type": "string",
+      "access": 2,
+      "name": "Описание"
+    }
+  }
+}

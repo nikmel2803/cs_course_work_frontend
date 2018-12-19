@@ -19,7 +19,6 @@
   export default {
     name: 'StaffItem',
     mixins: [ItemMixin],
-    props: ['data'],
     components: {
       'EmployeeItem': EmployeeItem
     }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <form class="sing-up" @submit.prevent="signUp">
-      <h1>Sign up</h1>
+      <h1>Зарегистрировать организацию</h1>
       <input required v-model="login" type="text" placeholder="Login"/>
       <input required v-model="password" type="password" placeholder="Password"/>
       <input required v-model="email" placeholder="email"/>
@@ -14,10 +14,10 @@
         <option value="1">Ж</option>
       </select>
       <input required v-model="birthday" placeholder="Дата рождения"/>
-      <input required v-model="orgData.name" placeholder="Названия предприятия"/>
-      <input required v-model="orgData.description" placeholder="Описания предприятия"/>
-      <input required v-model="orgData.founding_date" placeholder="Дата основания предприятия"/>
-      <input required v-model="orgData.address" placeholder="Адрес предприятия"/>
+      <input required v-model="orgData.name" placeholder="Названия организации"/>
+      <input required v-model="orgData.description" placeholder="Описания организации"/>
+      <input required v-model="orgData.founding_date" placeholder="Дата основания организации"/>
+      <input required v-model="orgData.address" placeholder="Адрес организации"/>
       <hr/>
       <button type="submit">Зарегистрироваться</button>
       <router-link to="/sign-in">Уже есть аккаунт? Авторизируйтесь</router-link>
@@ -50,7 +50,7 @@
     },
     methods: {
       signUp: function () {
-        apiCall.signUp({
+        apiCall.registerOrg({
           login: this.login,
           password: this.password,
           email: this.email,
