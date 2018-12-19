@@ -46,20 +46,13 @@
       "type": "number",
       "name": "Уровень доступа",
       "access": 1,
-      "available_values": [
+      "available_values":
         {
-          "name": "Глава организации",
-          "value": 0
-        },
-        {
-          "name": "Менеджер",
-          "value": 1
-        },
-        {
-          "name": "Водитель",
-          "value": 2
+          "0": "Глава организации",
+          "1": "Менеджер",
+          "2": "Водитель"
         }
-      ]
+
     },
     "first_name": {
       "type": "string",
@@ -79,7 +72,13 @@
     "sex": {
       "type": "number",
       "name": "Пол",
-      "access": 1
+      "access": 1,
+      "available_values":
+        {
+          "0": "Ж",
+          "1": "М"
+        }
+
     },
     "birthday": {
       "type": "string",

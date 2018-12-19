@@ -1,9 +1,13 @@
 <template>
   <div class="tree-item employee-item">
     <div class="tree-item__label-wrapper">
-      <div @click="toggleChildren" v-if="!showChildren">{{ data.last_name }} {{ data.first_name }} {{ data.patronymic }}</div>
+      <div @click="toggleChildren" v-if="!showChildren">
+        {{ data.last_name }} {{ data.first_name }} {{ data.patronymic }}
+      </div>
       <div v-else-if="!isEdit" @click="toggleChildren">
-        <div v-for="(field, key) in $scheme.employees" v-if="!(field.show===false)">{{field.name}}: {{data[key]}}</div>
+        <div v-for="(field, key) in $scheme.employees" v-if="!(field.show===false)">{{field.name}}:
+          {{field.available_values? field.available_values[data[key]] : data[key]}}
+        </div>
       </div>
       <div v-else>
         <table>
@@ -13,7 +17,7 @@
               <input v-if="!(field.available_values)" type="text" v-model="data[key]">
               <select v-else v-model="data[key]">
                 <option disabled value="">{{field.name}}</option>
-                <option v-bind:value="value.value" v-for="value in field.available_values">{{value.name}}</option>
+                <option v-bind:value="valueKey" v-for="(value, valueKey) in field.available_values">{{value}}</option>
               </select>
             </td>
           </tr>
@@ -41,7 +45,8 @@
     methods: {
       saveData() {
         this.isEdit = false;
-        this.$eventHub.$emit('save');      }
+        this.$eventHub.$emit('save');
+      }
     }
   };
 </script>
