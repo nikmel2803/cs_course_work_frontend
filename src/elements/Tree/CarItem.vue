@@ -38,12 +38,13 @@
       </div>
     </div>
     <div class="tree-item__dots" @click.capture="edit"></div>
+    <div class="tree-item__remove" @click.capture="remove"></div>
   </div>
 </template>
 
 <script>
   import ItemMixin from './ItemMixin';
-  import {SAVE_CAR} from '../../store/actions/organizationsData';
+  import {SAVE_CAR, REMOVE_CAR} from '../../store/actions/organizationsData';
 
   export default {
     name: 'CarItem',
@@ -61,6 +62,9 @@
       };
     },
     methods: {
+      remove(){
+        this.$store.commit(REMOVE_CAR, {carIndex: this.carIndex, id:this.orgId})
+      },
       resetData() {
         const org = this.$store.state.organizationsData.organizations.find(org => org.id === this.orgId);
 

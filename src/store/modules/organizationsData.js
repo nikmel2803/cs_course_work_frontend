@@ -1,4 +1,4 @@
-import {SAVE_DATA, LOAD_DATA, SAVE_ORG, SAVE_CAR} from '../actions/organizationsData';
+import {SAVE_DATA, LOAD_DATA, SAVE_ORG, SAVE_CAR, REMOVE_CAR} from '../actions/organizationsData';
 import Vue from 'vue';
 
 const state = {
@@ -27,6 +27,10 @@ const mutations = {
   [SAVE_CAR](state, {id, index, name, model, purchase_date, description}) {
     const org = getOrg(id);
     Vue.set(org.car_park, index, {name, model, purchase_date, description});
+  },
+  [REMOVE_CAR](state, {id, carIndex}) {
+    const org = getOrg(id);
+    org.car_park.splice(carIndex, 1);
   }
 };
 

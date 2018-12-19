@@ -44,7 +44,15 @@
     background-size: 15px;
     background-repeat: no-repeat;
   }
-
+  &__remove {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    width: 15px;
+    height: 15px;
+    background-size: 15px;
+    background: url("../../assets/minus.svg") no-repeat center center;
+  }
   &--opened {
     background-image: url("../../assets/next.svg");
   }
