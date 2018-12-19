@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <organization-item
       :data="org"
     ></organization-item>
@@ -19,7 +20,8 @@
     },
     data() {
       return {
-        org: {}
+        org: {},
+        user:{}
       }
     },
     components: {

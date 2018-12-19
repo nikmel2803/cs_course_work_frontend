@@ -38,13 +38,28 @@
     "password": {
       "type": "string",
       "name": "Пароль",
-      "access": 1
+      "access": 1,
+      "show": false
     },
     "access": {
-      "default":2,
-      "type": "string",
+      "default": 2,
+      "type": "number",
       "name": "Уровень доступа",
-      "access": 1
+      "access": 1,
+      "available_values": [
+        {
+          "name": "Глава организации",
+          "value": 0
+        },
+        {
+          "name": "Менеджер",
+          "value": 1
+        },
+        {
+          "name": "Водитель",
+          "value": 2
+        }
+      ]
     },
     "first_name": {
       "type": "string",
