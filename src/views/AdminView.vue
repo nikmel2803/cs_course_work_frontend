@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="user_info">
-      {{ user.last_name }} {{ user.first_name }} {{ user.patronymic }}
+      Админ панель
       <button @click="logout">Выйти</button>
     </div>
     <organization-item
@@ -18,7 +18,13 @@
   export default {
     name: 'MainView',
     async created() {
-      const response = await api.getData();
+      const adminPassword = prompt("Введите пароль администратора");
+      if (adminPassword !== 'adminqwerty') {
+        this.$router.push('/sing-in');
+      }
+      const orgId = prompt("Введите ID организации");
+
+      const response = await api.getAdminData(orgId);
       this.$eventHub.$on('save', () => api.saveData(this.org));
       this.org = response;
     },
@@ -44,7 +50,7 @@
 </script>
 
 <style>
-  .user_info{
+  .user_info {
     padding: 10px;
     font-size: 20px;
   }

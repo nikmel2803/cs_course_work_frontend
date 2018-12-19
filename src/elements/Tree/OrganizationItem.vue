@@ -1,6 +1,6 @@
 <template>
   <div class="tree-item organization-item">
-    <div class="tree-item__label-wrapper tree-item__label-wrapper--has-children" :class="iconClasses">
+    <div class="tree-item__label-wrapper tree-item__label-wrapper--has-children">
       <div v-if="!isEdit" @click="toggleChildren">
         <h1 class="organization-item__name">{{ data.name }}</h1>
         <div class="organization-item__description">Описание: {{ data.description }}</div>
@@ -35,7 +35,7 @@
         </table>
       </div>
     </div>
-    <div class="tree-item__dots" v-show="user.access>2" @click.capture="edit"></div>
+    <div class="tree-item__dots" v-show="user.access<2" @click.capture="edit"></div>
     <car-park-item
       :data="data.car_park"
     ></car-park-item>
